@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+     http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ 
+  <module-name>simple-auth-service</module-name>
+  <display-name>Auth Service Example</display-name>
+ 
+   <context-param>
+      <param-name>resteasy.servlet.mapping.prefix</param-name>
+      <param-value>/</param-value>
+   </context-param>
+ 
+ 
+	<security-constraint>
+		<display-name>Security Constraint für meinen Rest Service</display-name>
+		<web-resource-collection>
+			<web-resource-name>my secured message service</web-resource-name>
+			<url-pattern>/secured/message</url-pattern>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>only User in the application realm having the wheel role</description>
+			<role-name>wheel</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>ApplicationRealm</realm-name>
+    </login-config>
+ 
+    <security-role>
+        <role-name>wheel</role-name>
+    </security-role>
+</web-app>
